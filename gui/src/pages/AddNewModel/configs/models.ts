@@ -31,6 +31,37 @@ export interface ModelPackage {
 }
 
 export const models: { [key: string]: ModelPackage } = {
+  "raccoon": {
+    title: "Raccoon Completion 13B(16k)",
+    description: "16K max tokens, 13B parameters",
+    refUrl: "",
+    params: {
+      title: "raccoon",
+      model: "raccoon",
+      contextLength: 4096,
+    },
+    icon: "meta.png",
+    dimensions: [
+      {
+        name: "Parameter Count",
+        description: "The number of parameters in the model",
+        options: {
+          "13b": {
+            model: "Raccoon Completion 13B(16k)",
+            title: "13B",
+          },
+          "70b": {
+            model: "Raccoon Completion 70B(32k)",
+            title: "70B",
+          }
+        },
+      },
+    ],
+    providerOptions: [
+      "raccoon"
+    ],
+    isOpenSource: true,
+  },
   llama31Chat: {
     title: "Llama3.1 Chat",
     description: "The latest model from Meta, fine-tuned for chat",

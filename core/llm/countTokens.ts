@@ -332,10 +332,16 @@ function compileChatMessages(
   systemMessage: string | undefined = undefined,
 ): ChatMessage[] {
   const msgsCopy = msgs
-    ? msgs
-        .map((msg) => ({ ...msg }))
-        .filter((msg) => msg.content !== "" && msg.role !== "system")
+    ? msgs.filter((msg) => {
+      if (Array.isArray(msg.content)) {
+        // 如果 content 是数组，检查是否有非空的 text
+        return msg.content.some(part => part.text !== "");
+      }
+      // 如果 content 是字符串，检查是否非空
+      return msg.content !== "";
+    })
     : [];
+  // console.log(msgs, 'filtered', msgsCopy);
 
   if (prompt) {
     const promptMsg: ChatMessage = {

@@ -8,7 +8,7 @@ import { JSONContent } from "@tiptap/react";
 import { InputModifiers } from "core";
 import { usePostHog } from "posthog-js/react";
 import {
-  Fragment,
+  Fragment, Suspense,
   useCallback,
   useContext,
   useEffect,
@@ -61,6 +61,8 @@ import {
 } from "../util";
 import { FREE_TRIAL_LIMIT_REQUESTS } from "../util/freeTrial";
 import { getLocalStorage, setLocalStorage } from "../util/localStorage";
+import { Cube, Heart, Horse } from "@phosphor-icons/react";
+import Welcome from "../components/auth/Welcome";
 
 const TopGuiDiv = styled.div<{
   showScrollbar?: boolean;
@@ -342,6 +344,7 @@ function GUI() {
     [state.history],
   );
 
+
   return (
     <>
       <TopGuiDiv
@@ -349,9 +352,16 @@ function GUI() {
         onScroll={handleScroll}
         showScrollbar={state.config.ui?.showChatScrollbar || false}
       >
+        <Suspense fallback={<div>Loading translations...</div>}>
+          <Welcome />
+        </Suspense>
         <div className="max-w-3xl m-auto">
           <StepsDiv>
             {state.history.map((item, index: number) => {
+
+              console.log(item.editorState, 23)
+
+
               return (
                 <Fragment key={index}>
                   <ErrorBoundary
@@ -360,7 +370,9 @@ function GUI() {
                       dispatch(newSession());
                     }}
                   >
-                    {item.message.role === "user" ? (
+                    {
+
+                      item.message.role === "user" ? (
                       <ContinueInputBox
                         onEnter={async (editorState, modifiers) => {
                           streamResponse(
@@ -370,6 +382,7 @@ function GUI() {
                             index,
                           );
                         }}
+                        readOnly={true}
                         isLastUserInput={isLastUserInput(index)}
                         isMainInput={false}
                         editorState={item.editorState}

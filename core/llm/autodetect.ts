@@ -35,7 +35,8 @@ import {
 } from "./templates/edit.js";
 
 const PROVIDER_HANDLES_TEMPLATING: ModelProvider[] = [
-  "lmstudio",
+  "raccoon",
+    "lmstudio",
   "openai",
   "ollama",
   "together",
@@ -49,7 +50,9 @@ const PROVIDER_HANDLES_TEMPLATING: ModelProvider[] = [
 ];
 
 const PROVIDER_SUPPORTS_IMAGES: ModelProvider[] = [
-  "openai",
+  "raccoon",
+  
+    "openai",
   "ollama",
   "gemini",
   "free-trial",
@@ -102,6 +105,8 @@ function modelSupportsImages(
   return false;
 }
 const PARALLEL_PROVIDERS: ModelProvider[] = [
+  "raccoon",
+    
   "anthropic",
   "bedrock",
   "sagemaker",
@@ -232,6 +237,7 @@ function autodetectTemplateFunction(
 
   if (templateType) {
     const mapping: Record<TemplateType, any> = {
+      raccoon: templateAlpacaMessages,
       llama2: llama2TemplateMessages,
       alpaca: templateAlpacaMessages,
       phi2: phi2TemplateMessages,

@@ -25,6 +25,7 @@ import { setLastControlServerBetaEnabledStatus } from "../redux/slices/miscSlice
 import { RootState } from "../redux/store";
 import { getFontSize } from "../util";
 import ButtonWithTooltip from "./ButtonWithTooltip";
+import { useNavigate } from "react-router-dom";
 
 const StyledListbox = styled(Listbox)`
   background-color: ${vscBackground};
@@ -128,6 +129,7 @@ function ProfileSwitcher(props: {}) {
   const { session, logout, login } = useAuth();
   const [profiles, setProfiles] = useState<ProfileDescription[]>([]);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const lastControlServerBetaEnabledStatus = useSelector(
     (state: RootState) => state.misc.lastControlServerBetaEnabledStatus,
@@ -238,14 +240,15 @@ function ProfileSwitcher(props: {}) {
       <ButtonWithTooltip
         tooltipPlacement="top-end"
         onClick={() => {
-          if (selectedProfileId === "local") {
-            ideMessenger.post("openConfigJson", undefined);
-          } else {
-            ideMessenger.post(
-              "openUrl",
-              `http://app.continue.dev/workspaces/${selectedProfileId}/config`,
-            );
-          }
+          navigate("/settings");
+          // if (selectedProfileId === "local") {
+          //   ideMessenger.post("openConfigJson", undefined);
+          // } else {
+          //   ideMessenger.post(
+          //     "openUrl",
+          //     `http://app.continue.dev/workspaces/${selectedProfileId}/config`,
+          //   );
+          // }
         }}
         text="Configure Continue"
       >

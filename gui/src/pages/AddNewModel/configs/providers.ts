@@ -51,6 +51,29 @@ export const apiBaseInput: InputDescriptor = {
 };
 
 export const providers: Partial<Record<ModelProvider, ProviderInfo>> = {
+  "raccoon": {
+    title: "Raccoon",
+    provider: "raccoon",
+    description: "Use gpt-4, gpt-3.5-turbo, or any other OpenAI model",
+    longDescription:
+        "Use gpt-4, gpt-3.5-turbo, or any other OpenAI model. See [here](https://openai.com/product#made-for-developers) to obtain an API key.",
+    icon: "openai.png",
+    tags: [ModelProviderTags.RequiresApiKey],
+    packages: [
+      models.raccoon
+    ],
+    collectInputFor: [
+      {
+        inputType: "text",
+        key: "apiKey",
+        label: "API Key",
+        placeholder: "Enter your Raccoon API key",
+        required: true,
+      },
+      ...completionParamsInputsConfigs,
+    ],
+    apiKeyUrl: "https://xiaohuanxiong.com",
+  },
   openai: {
     title: "OpenAI",
     provider: "openai",

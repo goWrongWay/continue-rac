@@ -8,6 +8,7 @@ import {
 import { renderTemplatedString } from "../../promptFiles/renderTemplatedString";
 import { DEFAULT_MAX_TOKENS } from "../constants";
 import { BaseLLM } from "../index";
+import Raccoon from "./Raccoon";
 import Anthropic from "./Anthropic";
 import Azure from "./Azure";
 import Bedrock from "./Bedrock";
@@ -44,6 +45,7 @@ import WatsonX from "./WatsonX";
 import ContinueProxy from "./stubs/ContinueProxy";
 
 const LLMs = [
+  Raccoon,
   Anthropic,
   Cohere,
   FreeTrial,
@@ -89,6 +91,8 @@ export async function llmFromDescription(
   completionOptions?: BaseCompletionOptions,
   systemMessage?: string,
 ): Promise<BaseLLM | undefined> {
+  console.log(23234);
+
   const cls = LLMs.find((llm) => llm.providerName === desc.provider);
 
   if (!cls) {

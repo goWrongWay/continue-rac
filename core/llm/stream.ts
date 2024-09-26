@@ -51,6 +51,9 @@ function parseDataLine(line: string): any {
 }
 
 function parseSseLine(line: string): { done: boolean; data: any } {
+  if (line.includes("data:[DONE]")) {
+    return { done: true, data: undefined };
+  }
   if (line.startsWith("data: [DONE]")) {
     return { done: true, data: undefined };
   }

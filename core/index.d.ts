@@ -590,6 +590,7 @@ type ContextProviderName =
   | string;
 
 type TemplateType =
+    | "raccoon"
   | "llama2"
   | "alpaca"
   | "zephyr"
@@ -608,6 +609,7 @@ type TemplateType =
   | "llama3";
 
 type ModelProvider =
+  | "raccoon"
   | "openai"
   | "free-trial"
   | "anthropic"

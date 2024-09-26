@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
 import CustomPostHogProvider from "./hooks/CustomPostHogProvider";
+import './i18n';
 import "./index.css";
 import { persistor, store } from "./redux/store";
 

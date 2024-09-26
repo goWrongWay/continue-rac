@@ -379,8 +379,11 @@ export class Core {
         msg.data.messages,
         msg.data.completionOptions,
       );
+      console.log(1)
       let next = await gen.next();
       while (!next.done) {
+        console.log(2)
+
         if (abortedMessageIds.has(msg.messageId)) {
           abortedMessageIds.delete(msg.messageId);
           next = await gen.return({
@@ -394,9 +397,12 @@ export class Core {
           });
           break;
         }
+        console.log(next.value, 34);
         yield { content: next.value.content };
         next = await gen.next();
       }
+      console.log(5)
+
 
       if (config.experimental?.readResponseTTS && "completion" in next.value) {
         void TTS.read(next.value?.completion);

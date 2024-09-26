@@ -136,6 +136,7 @@ interface TipTapEditorProps {
   availableContextProviders: ContextProviderDescription[];
   availableSlashCommands: ComboBoxItem[];
   isMainInput: boolean;
+  readOnly: boolean;
   onEnter: (editorState: JSONContent, modifiers: InputModifiers) => void;
   editorState?: JSONContent;
 }
@@ -453,7 +454,7 @@ function TipTapEditor(props: TipTapEditorProps) {
       },
     },
     content: props.editorState || mainEditorContent || "",
-    onFocus: () => setIsEditorFocused(true),
+    onFocus: () => !props.readOnly && setIsEditorFocused(true),
     onBlur: () => setIsEditorFocused(false),
     onUpdate: ({ editor, transaction }) => {
       // If /edit is typed and no context items are selected, select the first
@@ -816,7 +817,7 @@ function TipTapEditor(props: TipTapEditorProps) {
   }, []);
 
   const [activeKey, setActiveKey] = useState<string | null>(null);
-
+  console.log(props.readOnly);
   return (
     <InputBoxDiv
       onKeyDown={(e) => {
@@ -867,6 +868,9 @@ function TipTapEditor(props: TipTapEditorProps) {
         event.preventDefault();
       }}
     >
+      <div>{
+        props.readOnly ? <div style={{ color: "gray", fontSize: "12px", marginBottom: "5px" }}>This is a read-only input</div> : null
+      }</div>
       <EditorContent
         spellCheck={false}
         editor={editor}
@@ -874,27 +878,30 @@ function TipTapEditor(props: TipTapEditorProps) {
           event.stopPropagation();
         }}
       />
-      <InputToolbar
-        activeKey={activeKey}
-        hidden={shouldHideToolbar && !props.isMainInput}
-        onAddContextItem={() => {
-          if (editor.getText().endsWith("@")) {
-          } else {
-            editor.commands.insertContent("@");
-          }
-        }}
-        onEnter={onEnterRef.current}
-        onImageFileSelected={(file) => {
-          handleImageFile(file).then(([img, dataUrl]) => {
-            const { schema } = editor.state;
-            const node = schema.nodes.image.create({ src: dataUrl });
-            editor.commands.command(({ tr }) => {
-              tr.insert(0, node);
-              return true;
+      {
+        !props.readOnly && <InputToolbar
+          activeKey={activeKey}
+          hidden={shouldHideToolbar && !props.isMainInput}
+          onAddContextItem={() => {
+            if (editor.getText().endsWith("@")) {
+            } else {
+              editor.commands.insertContent("@");
+            }
+          }}
+          onEnter={onEnterRef.current}
+          onImageFileSelected={(file) => {
+            handleImageFile(file).then(([img, dataUrl]) => {
+              const { schema } = editor.state;
+              const node = schema.nodes.image.create({ src: dataUrl });
+              editor.commands.command(({ tr }) => {
+                tr.insert(0, node);
+                return true;
+              });
             });
-          });
-        }}
-      />
+          }}
+        />
+      }
+
 
       {showDragOverMsg &&
         modelSupportsImages(
