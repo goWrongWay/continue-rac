@@ -136,7 +136,7 @@ interface TipTapEditorProps {
   availableContextProviders: ContextProviderDescription[];
   availableSlashCommands: ComboBoxItem[];
   isMainInput: boolean;
-  readOnly: boolean;
+  readOnly?: boolean;
   onEnter: (editorState: JSONContent, modifiers: InputModifiers) => void;
   editorState?: JSONContent;
 }

@@ -70,6 +70,7 @@ function CheckDiv(props) {
 
   let theme = 'dark';
   if (window.fullColorTheme) {
+    // @ts-ignore
     if (window.fullColorTheme.base === 'vs') {
       theme = 'light'
       avator = window.vscMediaUrl ? `${window.vscMediaUrl}/media/raccoon-light.svg`: avatarLightSVG
