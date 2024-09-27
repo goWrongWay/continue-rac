@@ -1527,7 +1527,8 @@
                 "comment",
                 "http",
                 "commit",
-                "review"
+                "review",
+                "translate"
               ],
               "type": "string",
               "markdownEnumDescriptions": [
@@ -1539,7 +1540,8 @@
                 "Add comments to the highlighted code",
                 "Write a custom slash command at your own HTTP endpoint. Set 'url' in the params object for the endpoint you have setup.",
                 "Generate a commit message for the current changes",
-                "Review code and give feedback"
+                "Review code and give feedback",
+                "translate text to chinese"
               ]
             },
             {

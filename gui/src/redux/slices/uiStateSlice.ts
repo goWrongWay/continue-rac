@@ -3,6 +3,7 @@ import {
   defaultOnboardingCardState,
   OnboardingCardState,
 } from "../../components/OnboardingCard";
+import { ShowLoginCardState } from "../../components/auth/hooks/useShowLoginCard";
 
 type UiState = {
   bottomMessage: JSX.Element | undefined;
@@ -13,6 +14,7 @@ type UiState = {
   dialogEntryOn: boolean;
   nextCodeBlockToApplyIndex: number;
   onboardingCard: OnboardingCardState;
+  showLoginCard: ShowLoginCardState;
 };
 
 export const uiStateSlice = createSlice({
@@ -33,6 +35,12 @@ export const uiStateSlice = createSlice({
       action: PayloadAction<Partial<OnboardingCardState>>,
     ) => {
       state.onboardingCard = { ...state.onboardingCard, ...action.payload };
+    },
+    setShowLoginCard: (
+      state,
+      action: PayloadAction<Partial<ShowLoginCardState>>,
+    ) => {
+      state.showLoginCard = { ...state.showLoginCard, ...action.payload };
     },
     setBottomMessage: (
       state,
@@ -81,6 +89,7 @@ export const uiStateSlice = createSlice({
 
 export const {
   setOnboardingCard,
+  setShowLoginCard,
   setDialogMessage,
   setDialogEntryOn,
   setShowDialog,

@@ -308,6 +308,7 @@ function ModelSelect() {
       onChange={async (val: string) => {
         if (val === defaultModel?.title) return;
         dispatch(setDefaultModel({ title: val }));
+        debugger;
         await ideMessenger.request("update/modelChange", val);
       }}
     >

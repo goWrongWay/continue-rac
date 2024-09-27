@@ -55,7 +55,7 @@ function LanguageSwitcher() {
             <Menu as="div" className="relative inline-block text-left">
               <div>
                 <Menu.Button className="inline-flex border-0 bg-transparent focus:outline-none focus:bg-transparent cursor-pointer">
-                  <Translate color={vscForeground} />
+                  <Translate size={18} color={vscForeground} />
                 </Menu.Button>
               </div>
               <Transition

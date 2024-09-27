@@ -224,7 +224,7 @@ function GUI() {
           setLocalStorage("ftc", u + 1);
 
           if (u >= FREE_TRIAL_LIMIT_REQUESTS) {
-            onboardingCard.open("Best");
+            // onboardingCard.open("Best");
             posthog?.capture("ftc_reached");
             ideMessenger.ide.showToast(
               "info",
@@ -467,6 +467,7 @@ function GUI() {
               );
             })}
           </StepsDiv>
+
           <ContinueInputBox
             onEnter={(editorContent, modifiers) => {
               sendInput(editorContent, modifiers);
@@ -510,17 +511,17 @@ function GUI() {
                 </div>
               ) : null}
 
-              {onboardingCard.show && (
-                <div className="mt-10 mx-2">
-                  <OnboardingCard activeTab={onboardingCard.activeTab} />
-                </div>
-              )}
+              {/*{onboardingCard.show && (*/}
+              {/*  <div className="mt-10 mx-2">*/}
+              {/*    <OnboardingCard activeTab={onboardingCard.activeTab} />*/}
+              {/*  </div>*/}
+              {/*)}*/}
 
-              {showTutorialCard !== false && !onboardingCard.open && (
-                <div className="flex justify-center w-full">
-                  <TutorialCard onClose={closeTutorialCard} />
-                </div>
-              )}
+              {/*{showTutorialCard !== false && !onboardingCard.open && (*/}
+              {/*  <div className="flex justify-center w-full">*/}
+              {/*    <TutorialCard onClose={closeTutorialCard} />*/}
+              {/*  </div>*/}
+              {/*)}*/}
             </>
           )}
         </div>

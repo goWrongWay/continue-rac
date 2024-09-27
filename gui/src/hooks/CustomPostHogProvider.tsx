@@ -12,6 +12,7 @@ const CustomPostHogProvider = ({ children }: PropsWithChildren) => {
   const [client, setClient] = React.useState<any>(undefined);
 
   useEffect(() => {
+    // TODO
     if (allowAnonymousTelemetry) {
       posthog.init("phc_JS6XFROuNbhJtVCEdTSYk6gl5ArRrTNMpCcguAXlSPs", {
         api_host: "https://app.posthog.com",

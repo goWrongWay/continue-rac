@@ -22,6 +22,7 @@ import PostHogPageView from "./PosthogPageView";
 import ProfileSwitcher from "./ProfileSwitcher";
 import { isNewUserOnboarding } from "./OnboardingCard/utils";
 import { useOnboardingCard } from "./OnboardingCard";
+import {useShowLoginCard} from "./auth/hooks/useShowLoginCard";
 import {
   setBottomMessage,
   setBottomMessageCloseTimeout,
@@ -109,6 +110,7 @@ const Layout = () => {
   const dispatch = useDispatch();
   const ideMessenger = useContext(IdeMessengerContext);
   const onboardingCard = useOnboardingCard();
+  const showLoginCard = useShowLoginCard();
 
   const dialogMessage = useSelector(
     (state: RootState) => state.uiState.dialogMessage,
@@ -186,28 +188,29 @@ const Layout = () => {
     [],
   );
 
-  useWebviewListener(
-    "openOnboardingCard",
-    async () => {
-      onboardingCard.open("Best");
-    },
-    [],
-  );
+  // useWebviewListener(
+  //   "openOnboardingCard",
+  //   async () => {
+  //     onboardingCard.open("Best");
+  //   },
+  //   [],
+  // );
 
-  useWebviewListener(
-    "setupLocalConfig",
-    async () => {
-      onboardingCard.open("Local");
-    },
-    [],
-  );
+  // useWebviewListener(
+  //   "setupLocalConfig",
+  //   async () => {
+  //     onboardingCard.open("Local");
+  //   },
+  //   [],
+  // );
 
   useEffect(() => {
     if (
       isNewUserOnboarding() &&
       (location.pathname === "/" || location.pathname === "/index.html")
     ) {
-      onboardingCard.open("Quickstart");
+      // onboardingCard.open("Quickstart");
+      showLoginCard.open("Browser");
     }
   }, [location]);
 
